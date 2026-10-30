@@ -4,12 +4,7 @@ export default function Document() {
   return (
     <Html lang="en-KE">
       <Head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap"
-          rel="stylesheet"
-        />
+        <meta name="theme-color" content="#080809" />
       </Head>
       <body>
         <Main />

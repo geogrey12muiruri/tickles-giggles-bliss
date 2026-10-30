@@ -1,25 +1,29 @@
 # Image assets
 
-## Folders
+## Served folders (WebP only in the UI)
 
-| Path | Role |
-|------|------|
-| `client/kids`, `client/bliss` | **Source** photos. Keep originals here. |
-| `hero` | **Source** hero photos. |
-| `optimized/{kids,bliss,hero}` | **Served** WebP derivatives used by the landing page. |
+| Path | Use |
+|------|-----|
+| `client/kids/*.webp` | Tickles & Giggles product photos |
+| `client/bliss/*.webp` | Bliss n Blush product photos |
+| `hero/*.webp` | Landing hero |
 
-The app catalog points at `optimized/`. Do not wire UI to the source folders.
+The catalog helpers (`kidsAsset` / `blissAsset` / `heroAsset`) always resolve to `.webp` in these folders.
 
-## Re-optimize after adding photos
+## Naming
+
+Use short kebab-case names only, e.g. `shop-display.webp`, `home-bar.webp`.
+
+Avoid Instagram caption filenames (spaces, emojis, long titles) — rename before dropping into `client/`.
+
+## Optional JPEG originals
+
+`.jpg` files may remain in `client/` for archival, but the app does not link them.
+
+## Re-export from originals
 
 ```bash
-python3 scripts/optimize-images.py
+npm run optimize:images
 ```
 
-Requires Pillow (`pip install pillow` if needed).
-
-## Guidelines
-
-- Prefer photographing / exporting near the display size (shop cards ~1200px wide, grid ~900px).
-- Drop new `.jpg` files into the matching `client/` or `hero/` folder, then run the script.
-- Commit both the source and the generated WebP so deploys do not depend on CI image tooling.
+Writes/updates WebPs under `client/{kids,bliss}` and `hero/`.

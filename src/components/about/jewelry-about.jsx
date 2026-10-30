@@ -22,6 +22,7 @@ const locations = [
 
 const JewelryAbout = () => {
   const [activeLocationIndex, setActiveLocationIndex] = useState(0);
+  const [mapEnabled, setMapEnabled] = useState(false);
   const activeLocation = locations[activeLocationIndex];
 
   return (
@@ -40,22 +41,36 @@ const JewelryAbout = () => {
                   type="button"
                   aria-pressed={activeLocationIndex === index}
                   className={activeLocationIndex === index ? "is-active" : ""}
-                  onClick={() => setActiveLocationIndex(index)}
+                  onClick={() => {
+                    setActiveLocationIndex(index);
+                    setMapEnabled(true);
+                  }}
                 >
                   <span>0{index + 1}</span>
                   {index === 0 ? "Nairobi CBD" : "Adams Arcade"}
                 </button>
               ))}
             </div>
-            <iframe
-              key={activeLocation.embedUrl}
-              className="client-locations__map"
-              src={activeLocation.embedUrl}
-              title={`Google Maps: ${activeLocation.name}, ${activeLocation.detail}`}
-              loading="lazy"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            />
+
+            {mapEnabled ? (
+              <iframe
+                key={activeLocation.embedUrl}
+                className="client-locations__map"
+                src={activeLocation.embedUrl}
+                title={`Google Maps: ${activeLocation.name}, ${activeLocation.detail}`}
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            ) : (
+              <button
+                type="button"
+                className="client-locations__map client-locations__map-placeholder"
+                onClick={() => setMapEnabled(true)}
+              >
+                Load map for {activeLocation.name}
+              </button>
+            )}
           </div>
 
           <div className="client-locations__content">

@@ -1,41 +1,28 @@
-import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import SEO from "@/components/seo";
+import Wrapper from "@/layout/wrapper";
 import HeaderFour from "@/layout/headers/header-4";
 import FooterTwo from "@/layout/footers/footer-2";
-import Wrapper from "@/layout/wrapper";
-import error from "@assets/img/error/error.png";
 
-const ErrorPage = () => {
-  return (
-    <Wrapper>
-      <SEO pageTitle="404" />
-      <HeaderFour />
-      <section className="tp-error-area pt-110 pb-110">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-xl-6 col-lg-8 col-md-10">
-              <div className="tp-error-content text-center">
-                <div className="tp-error-thumb">
-                  <Image src={error} alt="Page not found" />
-                </div>
-                <h3 className="tp-error-title">Oops! Page not found</h3>
-                <p>
-                  Whoops, this is embarrassing. Looks like the page you were
-                  looking for was not found.
-                </p>
-                <Link href="/" className="tp-error-btn">
-                  Back to Home
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <FooterTwo />
-    </Wrapper>
-  );
-};
+const ErrorPage = () => (
+  <Wrapper>
+    <SEO pageTitle="404" />
+    <HeaderFour />
+    <main className="landing-error">
+      <div className="container">
+        <p className="landing-error__eyebrow">404</p>
+        <h1>This page wandered off.</h1>
+        <p className="landing-error__lede">
+          Head back to the home page to browse Tickles &amp; Giggles Kids and
+          Bliss n Blush.
+        </p>
+        <Link href="/" className="landing-error__cta">
+          Back home
+        </Link>
+      </div>
+    </main>
+    <FooterTwo />
+  </Wrapper>
+);
 
 export default ErrorPage;

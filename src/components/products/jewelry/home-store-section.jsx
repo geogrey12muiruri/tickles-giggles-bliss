@@ -44,7 +44,7 @@ const HomeStoreSection = () => {
         </div>
 
         <div className="home-store__grid" aria-live="polite">
-          {visibleProducts.map((item) => {
+          {visibleProducts.map((item, index) => {
             const isBliss = item.brand === "bliss";
             const shopName = isBliss ? "Bliss n Blush" : "Tickles & Giggles Kids";
             const instagram = isBliss ? BLISS_INSTAGRAM : KIDS_INSTAGRAM;
@@ -67,6 +67,8 @@ const HomeStoreSection = () => {
                     src={item.img}
                     alt={item.title}
                     fill
+                    loading={index < 2 ? "eager" : "lazy"}
+                    quality={70}
                     sizes="(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 50vw"
                   />
                 </a>

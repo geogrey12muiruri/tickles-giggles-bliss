@@ -57,6 +57,7 @@ const JewelryBanner = () => {
         if (mediaInView) {
           if (!sourceRequested) {
             sourceRequested = true;
+            video.src = HERO_VIDEO_SRC;
             video.load();
           } else if (video.readyState >= 2) {
             playVideo();
@@ -134,11 +135,10 @@ const JewelryBanner = () => {
                 <div className="client-home-hero__media is-calm">
                   <div className="client-home-hero__calm">
                     <Image
-                      src="/assets/img/optimized/hero/im1.webp"
+                      src="/assets/img/hero/im1.webp"
                       alt="Children in occasion wear at Tickles & Giggles"
                       fill
-                      priority
-                      quality={78}
+                      quality={72}
                       sizes="(min-width: 1440px) 760px, (min-width: 768px) 56vw, 60vw"
                       className="client-home-hero__calm-photo"
                     />
@@ -162,7 +162,6 @@ const JewelryBanner = () => {
                       <video
                         ref={videoRef}
                         className="client-home-hero__video"
-                        src={HERO_VIDEO_SRC}
                         muted
                         playsInline
                         preload="none"

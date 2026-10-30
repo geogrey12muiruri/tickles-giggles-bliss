@@ -1,29 +1,24 @@
 # Tickles & Giggles · Bliss n Blush
 
-Clean landing preview (not a Shofy fork). Same client design; unused ecommerce/demo routes and template product images removed.
+Clean Next.js landing preview (static export).
 
-## Install
+## Develop
 
 ```bash
-cd /home/parrot/kids_bliss/tickles-giggles-bliss
 npm install
 npm run dev
 ```
 
-## GitHub Pages
+## Production preview
 
 ```bash
-npm run build:pages
-gh repo create parrot-sketch/tickles-giggles-bliss --public --source=. --remote=origin --push
+npm run build
+npm run preview
 ```
 
-Then: **Settings → Pages → GitHub Actions**.
-
-## Images
-
-Sources: `public/assets/img/client|hero`  
-Served: `public/assets/img/optimized`  
+## Deploy (Vercel)
 
 ```bash
-npm run optimize:images
+npx vercel login
+npx vercel --prod
 ```

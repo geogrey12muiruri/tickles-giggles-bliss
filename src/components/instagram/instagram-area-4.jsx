@@ -69,6 +69,7 @@ const InstagramAreaFour = () => {
         if (isInView) {
           if (!sourceRequested) {
             sourceRequested = true;
+            video.src = SHOP_REEL_SRC;
             video.load();
           } else if (video.readyState >= 2) {
             playVideo();
@@ -136,11 +137,10 @@ const InstagramAreaFour = () => {
           <video
             ref={videoRef}
             className={`home-instagram__video${isPlaying ? " is-playing" : ""}`}
-            src={SHOP_REEL_SRC}
             poster={SHOP_REEL_POSTER}
             muted
             playsInline
-            preload="metadata"
+            preload="none"
             aria-label="New arrivals from Tickles & Giggles Kids and Bliss n Blush"
           />
         </div>

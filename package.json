@@ -7,32 +7,20 @@
     "dev": "next dev",
     "build": "next build",
     "build:pages": "GITHUB_PAGES=true next build",
+    "preview": "npx --yes serve out -l 3000",
     "start": "next start",
     "lint": "next lint",
     "optimize:images": "python3 scripts/optimize-images.py"
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.1.0",
-    "@popperjs/core": "^2.11.6",
-    "@reduxjs/toolkit": "^1.9.3",
-    "bootstrap": "^5.2.3",
-    "dayjs": "^1.11.7",
     "eslint": "8.36.0",
     "eslint-config-next": "13.5.11",
-    "js-cookie": "^3.0.5",
     "next": "13.5.11",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "^7.43.9",
-    "react-modal": "^3.16.1",
-    "react-redux": "^8.0.5",
     "react-slick": "^0.29.0",
-    "react-toastify": "^9.1.2",
-    "react-use": "^17.4.0",
     "sass": "^1.59.3",
-    "slick-carousel": "^1.8.1",
-    "yup": "^1.1.1"
-
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "typescript": "5.0.4"

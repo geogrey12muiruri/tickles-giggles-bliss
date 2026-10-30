@@ -1,102 +1,92 @@
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { useDispatch, useSelector } from 'react-redux';
-// internal
-import { CartTwo, Menu, Search, Wishlist } from '@/svg';
-import Menus from './header-com/menus';
-import useSticky from '@/hooks/use-sticky';
-import SearchBar from './header-com/search-bar';
-import OffCanvas from '@/components/common/off-canvas';
-import useCartInfo from '@/hooks/use-cart-info';
-import CartMiniSidebar from '@/components/common/cart-mini-sidebar';
-import { openCartMini } from '@/redux/features/cartSlice';
+import React, { useState } from "react";
+import Link from "next/link";
+import { CloseTwo, Menu } from "@/svg";
+import Menus from "./header-com/menus";
+import useSticky from "@/hooks/use-sticky";
+
+const NAV = [
+  { title: "Home", link: "/" },
+  { title: "Tickles & Giggles", link: "/#kids" },
+  { title: "Bliss n Blush", link: "/#bliss" },
+  { title: "Contact", link: "/contact" },
+];
 
 const HeaderFour = () => {
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isOffCanvasOpen, setIsCanvasOpen] = useState(false);
-  const { wishlist } = useSelector((state) => state.wishlist);
-  const { quantity } = useCartInfo();
   const { sticky } = useSticky();
-  const dispatch = useDispatch();
+
   return (
     <>
-      <header>
-        <div id="header-sticky" className={`tp-header-area tp-header-style-transparent-white tp-header-sticky tp-header-transparent has-dark-logo tp-header-height ${sticky ? 'header-sticky' : ''}`}>
-          <div className="tp-header-bottom-3 pl-85 pr-85">
-            <div className="container-fluid">
-              <div className="row align-items-center">
-                <div className="col-xl-2 col-lg-2 col-6">
-                  <div className="logo">
-                    <Link href="/">
-                      <span className="logo-light client-wordmark">
-                        Tickles & Giggles
-                        <small>Kids · Bliss n Blush</small>
-                      </span>
-                      <span className="logo-dark client-wordmark">
-                        Tickles & Giggles
-                        <small>Kids · Bliss n Blush</small>
-                      </span>
-                    </Link>
-                  </div>
-                </div>
-                <div className="col-xl-8 col-lg-8 d-none d-lg-block">
-                  <div className="main-menu menu-style-3 menu-style-4 p-relative">
-                    <nav className="tp-main-menu-content">
-                      <Menus />
-                    </nav>
-                  </div>
-                </div>
-                <div className="col-xl-2 col-lg-2 col-6">
-                  <div className="tp-header-action d-flex align-items-center justify-content-end ml-50">
+      <header className={`site-header${sticky ? " is-sticky" : ""}`}>
+        <div className="container site-header__bar">
+          <Link href="/" className="site-header__brand client-wordmark logo-light">
+            Tickles & Giggles
+            <small>Kids · Bliss n Blush</small>
+          </Link>
 
-                    <div className="tp-header-action-item d-none d-sm-block">
-                      <button onClick={() => setIsSearchOpen(true)} type="button" className="tp-header-action-btn tp-search-open-btn">
-                        <Search />
-                      </button>
-                    </div>
-                    <div className="tp-header-action-item d-none d-sm-block">
-                      <Link href="/wishlist" className="tp-header-action-btn">
-                        <Wishlist />
-                        <span className="tp-header-action-badge">{wishlist.length}</span>
-                      </Link>
-                    </div>
-                    <div className="tp-header-action-item d-none d-sm-block">
-                      <button onClick={() => dispatch(openCartMini())} type="button" className="tp-header-action-btn cartmini-open-btn">
-                        <CartTwo />
-                        <span className="tp-header-action-badge">{quantity}</span>
-                      </button>
-                    </div>
-                    <div className="tp-header-action-item d-lg-none">
-                      <button onClick={() => setIsCanvasOpen(true)} type="button" className="tp-offcanvas-open-btn">
-                        <Menu />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <nav className="site-header__nav" aria-label="Primary">
+            <Menus />
+          </nav>
+
+          <button
+            type="button"
+            className="site-header__menu-btn"
+            aria-expanded={isOffCanvasOpen}
+            aria-controls="site-mobile-nav"
+            aria-label={isOffCanvasOpen ? "Close menu" : "Open menu"}
+            onClick={() => setIsCanvasOpen(true)}
+          >
+            <Menu />
+          </button>
         </div>
       </header>
 
-      {/* search bar start */}
-      <SearchBar isSearchOpen={isSearchOpen} setIsSearchOpen={setIsSearchOpen} />
-      {/* search bar end */}
-
-      {/* cart mini sidebar start */}
-      <CartMiniSidebar />
-      {/* cart mini sidebar end */}
-
-      {/* off canvas start */}
-      <OffCanvas
-        isOffCanvasOpen={isOffCanvasOpen}
-        setIsCanvasOpen={setIsCanvasOpen}
-        staticCategories={[
-          { title: "Tickles & Giggles Kids", link: "/#kids" },
-          { title: "Bliss n Blush", link: "/#bliss" },
-        ]}
-      />
-      {/* off canvas end */}
+      <div
+        id="site-mobile-nav"
+        className={`site-drawer${isOffCanvasOpen ? " is-open" : ""}`}
+      >
+        <div
+          className="site-drawer__overlay"
+          onClick={() => setIsCanvasOpen(false)}
+          aria-hidden="true"
+        />
+        <div className="site-drawer__panel">
+          <button
+            type="button"
+            className="site-drawer__close"
+            aria-label="Close menu"
+            onClick={() => setIsCanvasOpen(false)}
+          >
+            <CloseTwo />
+          </button>
+          <Link
+            href="/"
+            className="site-drawer__brand client-wordmark logo-light"
+            onClick={() => setIsCanvasOpen(false)}
+          >
+            Tickles & Giggles
+            <small>Kids · Bliss n Blush</small>
+          </Link>
+          <nav aria-label="Mobile">
+            {NAV.map((item) => (
+              <Link
+                key={item.link}
+                href={item.link}
+                onClick={() => setIsCanvasOpen(false)}
+              >
+                {item.title}
+              </Link>
+            ))}
+          </nav>
+          <Link
+            href="/contact"
+            className="site-drawer__cta"
+            onClick={() => setIsCanvasOpen(false)}
+          >
+            Contact us
+          </Link>
+        </div>
+      </div>
     </>
   );
 };
